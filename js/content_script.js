@@ -58,15 +58,17 @@ function injextJs()
                     opener.myExportCfg.totalCount = companyCount; \n\
                 var remainCount = opener.myExportCfg.getRemainCount(); \n\
                 var start = opener.myExportCfg.exportedCount + 1; \n\
-                var end = start; \n\
                 var count = remainCount > 65535 ? 65535 : remainCount; \n\
+                var end = start + count - 1; \n\
                 do{ \n\
-                    count = Math.floor(count/2); \n\
-                    end = start + count; \n\
                     document.forms[0].exportRange.checked = true; \n\
                     document.forms[0].RANGEFROM.value = start; \n\
                     document.forms[0].RANGETO.value = end; \n\
-                }while(count > 0 && ExportController.GetWarningMessage() != null) \n\
+                    if(ExportController.GetWarningMessage() == null) \n\
+                        break; \n\
+                    count = Math.floor(count/2); \n\
+                    end = start + count - 1; \n\
+                }while(count > 0) \n\
                 opener.myExportCfg.nextCount = end; \n\
                 var exportName = document.forms[0].ctl00$ContentContainer1$ctl00$LowerContent$Formatexportoptions1$ExportDisplayName.value; \n\
      \n\
@@ -76,10 +78,10 @@ function injextJs()
                 console.log("RemainCount: " + remainCount); \n\
                 console.log("Start: " + start); \n\
                 console.log("End: " + end); \n\
-                //exportName = "Amadeus_" + start + "_" + end; \n\
-                //console.log("New export filename: " + exportName); \n\
+                exportName += "_" + start + "_" + end; \n\
+                console.log("New export filename: " + exportName); \n\
      \n\
-                //document.forms[0].ctl00$ContentContainer1$ctl00$LowerContent$Formatexportoptions1$ExportDisplayName.value = exportName; \n\
+                document.forms[0].ctl00$ContentContainer1$ctl00$LowerContent$Formatexportoptions1$ExportDisplayName.value = exportName; \n\
                 ExportController.OkClicked(); \n\
             } \n\
             else \n\
