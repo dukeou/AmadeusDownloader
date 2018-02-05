@@ -58,7 +58,7 @@ function injextJs()
                     opener.myExportCfg.totalCount = companyCount; \n\
                 var remainCount = opener.myExportCfg.getRemainCount(); \n\
                 var start = opener.myExportCfg.exportedCount + 1; \n\
-                var count = remainCount > 65535 ? 65535 : remainCount; \n\
+                var count = remainCount > 1000 ? 1000 : remainCount; \n\
                 var end = start + count - 1; \n\
                 do{ \n\
                     document.forms[0].exportRange.checked = true; \n\
@@ -78,7 +78,7 @@ function injextJs()
                 console.log("RemainCount: " + remainCount); \n\
                 console.log("Start: " + start); \n\
                 console.log("End: " + end); \n\
-                exportName += "_" + start + "_" + end; \n\
+                exportName = "Financial_data_" + start + "_" + end + "_" + new Date().getMilliseconds() + "_" + Math.floor(Math.random() * 100); \n\
                 console.log("New export filename: " + exportName); \n\
      \n\
                 document.forms[0].ctl00$ContentContainer1$ctl00$LowerContent$Formatexportoptions1$ExportDisplayName.value = exportName; \n\
