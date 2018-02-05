@@ -60,7 +60,6 @@ function injextJs()
                 var start = opener.myExportCfg.exportedCount + 1; \n\
                 var end = start; \n\
                 var count = remainCount > 65535 ? 65535 : remainCount; \n\
-                opener.myExportCfg.nextCount = end; \n\
                 do{ \n\
                     count = Math.floor(count/2); \n\
                     end = start + count; \n\
@@ -68,6 +67,7 @@ function injextJs()
                     document.forms[0].RANGEFROM.value = start; \n\
                     document.forms[0].RANGETO.value = end; \n\
                 }while(count > 0 && ExportController.GetWarningMessage() != null) \n\
+                opener.myExportCfg.nextCount = end; \n\
                 var exportName = document.forms[0].ctl00$ContentContainer1$ctl00$LowerContent$Formatexportoptions1$ExportDisplayName.value; \n\
      \n\
                 console.log("Export default filename: " + ExportDefaultName); \n\
@@ -93,6 +93,7 @@ function injextJs()
             { \n\
                 if(event.data.action == "complete" && opener.myExportCfg.openerTabId != 0) \n\
                 { \n\
+                    opener.myExportCfg.exportedCount = opener.myExportCfg.nextCount; \n\
                     window.close(); \n\
                     opener.postMessage({action: "start", sender: event.data.sender}, "https://amadeus-bvdinfo-com.iclibezp1.cc.ic.ac.uk"); \n\
                 } \n\
