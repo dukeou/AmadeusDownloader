@@ -5,7 +5,7 @@ function injextJs()
     injectScript.setAttribute('type', 'text/javascript');
     injectScript.text=
     ' \n\
-        if(/(Search\\.QuickSearch|List)\\.serv/.test(window.location.href) && typeof(exporter) != "undefined") \n\
+        if(/(Search\\.QuickSearch|List|List\\.FormatEdition)\\.serv/.test(window.location.href) && typeof(exporter) != "undefined") \n\
         { \n\
             var ctxmatch = window.location.href.match(/context=(\\w+)/); \n\
             var context = ""; \n\
@@ -17,7 +17,7 @@ function injextJs()
                 cid = cidmatch[1]; \n\
             console.log("cid = " + cid); \n\
             console.log("context = " + context); \n\
-            if(typeof(window.myExportCfg) == undefined || context != window.myExportCfg.context || cid != window.myExportCfg.cid) \n\
+            if(typeof(window.myExportCfg) == "undefined" || context != window.myExportCfg.context || cid != window.myExportCfg.cid) \n\
             { \n\
                 window.myExportCfg={}; \n\
                 window.myExportCfg.context = context; \n\
@@ -118,7 +118,7 @@ function injextJs()
         } \n\
     '
     document.head.appendChild(injectScript);
-    if(/(Search\.QuickSearch|List)\.serv/.test(window.location.href))
+    if(/(Search\.QuickSearch|List|List\.FormatEdition)\.serv/.test(window.location.href))
     {
         chrome.runtime.onMessage.addListener(function(request)
         {
