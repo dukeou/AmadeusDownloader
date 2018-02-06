@@ -7,20 +7,35 @@ function injextJs()
     ' \n\
         if(/(Search\\.QuickSearch|List)\\.serv/.test(window.location.href) && typeof(exporter) != "undefined") \n\
         { \n\
-            window.myExportCfg={}; \n\
-            window.myExportCfg.filename=""; \n\
-            window.myExportCfg.exportedCount = 0; \n\
-            window.myExportCfg.nextCount = 0; \n\
-            window.myExportCfg.totalCount = 0; \n\
-            window.myExportCfg.auto= false; \n\
-            window.myExportCfg.openerTabId = 0; \n\
-            window.myExportCfg.getRemainCount = function() \n\
+            var ctxmatch = window.location.href.match(/context=(\\w+)/); \n\
+            var context = ""; \n\
+            if(ctxmatch != null) \n\
+                context = ctxmatch[1]; \n\
+            var cidmatch = window.location.href.match(/_CID=(\\d+)/); \n\
+            var cid = -1; \n\
+            if(cidmatch != null) \n\
+                cid = cidmatch[1]; \n\
+            console.log("cid = " + cid); \n\
+            console.log("context = " + context); \n\
+            if(typeof(window.myExportCfg) == undefined || context != window.myExportCfg.context || cid != window.myExportCfg.cid) \n\
             { \n\
-                if(this.totalCount == 0) \n\
-                    return 1; \n\
-                if(this.totalCount < this.exportedCount) \n\
-                    return 0; \n\
-                return this.totalCount - this.exportedCount; \n\
+                window.myExportCfg={}; \n\
+                window.myExportCfg.context = context; \n\
+                window.myExportCfg.cid = cid; \n\
+                window.myExportCfg.filename=""; \n\
+                window.myExportCfg.exportedCount = 0; \n\
+                window.myExportCfg.nextCount = 0; \n\
+                window.myExportCfg.totalCount = 0; \n\
+                window.myExportCfg.auto= false; \n\
+                window.myExportCfg.openerTabId = 0; \n\
+                window.myExportCfg.getRemainCount = function() \n\
+                { \n\
+                    if(this.totalCount == 0) \n\
+                        return 1; \n\
+                    if(this.totalCount < this.exportedCount) \n\
+                        return 0; \n\
+                    return this.totalCount - this.exportedCount; \n\
+                } \n\
             } \n\
             window.addEventListener("message", function(event) \n\
             { \n\
@@ -58,7 +73,7 @@ function injextJs()
                     opener.myExportCfg.totalCount = companyCount; \n\
                 var remainCount = opener.myExportCfg.getRemainCount(); \n\
                 var start = opener.myExportCfg.exportedCount + 1; \n\
-                var count = remainCount > 1000 ? 1000 : remainCount; \n\
+                var count = remainCount > 5000 ? 5000 : remainCount; \n\
                 var end = start + count - 1; \n\
                 do{ \n\
                     document.forms[0].exportRange.checked = true; \n\
