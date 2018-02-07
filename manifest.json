@@ -32,5 +32,9 @@
     "background":
     {
         "scripts": ["js/background.js"]
+    },
+    "externally_connectable":
+    {
+        "matches": ["https://amadeus-bvdinfo-com.iclibezp1.cc.ic.ac.uk/*"]
     }
 }
