@@ -77,7 +77,8 @@ function injextJs()
                 console.log("RemainCount: " + remainCount); \n\
                 console.log("Start: " + start); \n\
                 console.log("End: " + end); \n\
-                chrome.runtime.sendMessage("apkbaikmddajcngbbhdpllejdkiidldl", {count: count, url: window.location.href}, function(response) \n\
+                //chrome.runtime.sendMessage("apkbaikmddajcngbbhdpllejdkiidldl", {count: count, url: window.location.href}, function(response) \n\
+                chrome.runtime.sendMessage("hihmlnabcjobgnabghjloghlneocbdme", {count: count, url: window.location.href}, function(response) \n\
                 { \n\
                     if(typeof(response) == "undefined") \n\
                     { \n\
