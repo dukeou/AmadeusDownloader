@@ -11,8 +11,7 @@ function injextJs()
     console.log('Open : ' + window.location.href);
     var injectScript = document.createElement('script');
     injectScript.setAttribute('type', 'text/javascript');
-    injectScript.text=
-    ' \n\
+    injectScript.text='var AmadeusExtensionId="' + chrome.runtime.id + '"; \n\
     window.addEventListener("message", function(event) \n\
     { \n\
         if(typeof(event.data.src) == undefined || event.data.src != "AmadeusDownloader") \n\
@@ -77,8 +76,7 @@ function injextJs()
                 console.log("RemainCount: " + remainCount); \n\
                 console.log("Start: " + start); \n\
                 console.log("End: " + end); \n\
-                //chrome.runtime.sendMessage("apkbaikmddajcngbbhdpllejdkiidldl", {count: count, url: window.location.href}, function(response) \n\
-                chrome.runtime.sendMessage("hihmlnabcjobgnabghjloghlneocbdme", {count: count, url: window.location.href}, function(response) \n\
+                chrome.runtime.sendMessage(AmadeusExtensionId, {count: count, url: window.location.href}, function(response) \n\
                 { \n\
                     if(typeof(response) == "undefined") \n\
                     { \n\
