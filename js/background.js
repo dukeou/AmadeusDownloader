@@ -63,7 +63,7 @@ function onDownloadChange(item)
 chrome.downloads.onCreated.addListener(onDownloadCreated);
 chrome.downloads.onDeterminingFilename.addListener(onDetermineFilename);
 chrome.downloads.onChanged.addListener(onDownloadChange);
-function startDownload(tabId, url)
+function startDownload(tabId, url, start_index)
 {
     console.log("startDownload : " + tabId + " " + url);
     var urlmatch = url.match(/https:\/\/amadeus-bvdinfo-com\.iclibezp1\.cc\.ic\.ac\.uk.*\/.*&context=(\w+)/);
@@ -78,11 +78,12 @@ function startDownload(tabId, url)
                 tabId: tabId,
                 context: context,
                 nextCount: 0,
-                exportedCount: 0
+                exportedCount: start_index - 1
             };
             console.log("New glist");
         }
         console.log("Send start message");
+        console.log("ExportedCount: " + g_list.exportedCount);
         chrome.tabs.sendMessage(tabId, {src: "AmadeusDownloader", action: "start", exportedCount: g_list.exportedCount}, function(){});
     }
 }
